@@ -30,7 +30,7 @@ class ProductController extends Controller
                     $message = $product;
                 }else{
                     if(is_numeric($page) && is_numeric($limit)){
-                        $offset = $page > 1 ? ( ($page - 1) * $limit ) - 1 : 0;
+                        $offset = $page > 1 ? ( ($page - 1) * $limit ) : 0;
                         $products = Product::offset($offset)->limit($limit)->get();
                         $message = $products;
                     }else{
