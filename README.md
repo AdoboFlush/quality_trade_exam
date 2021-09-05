@@ -2,7 +2,7 @@
 
 # How to setup
 
-- download/clone the repository to https://github.com/AdoboFlush/quality_trade_exam
+- download/clone the repository from this link: https://github.com/AdoboFlush/quality_trade_exam
 - move the project folder to your web server environment. Since I am using xampp, I placed it to Drive C > xampp > htdocs.
 - open the command line or terminal then go to the project directory
 - run "composer update" to install all its dependencies.
@@ -16,7 +16,7 @@
 Method : GET
 http://127.0.0.1:8000/api/products/view?page=<page_number>&limit=<limit_of_records>
 
-Sample Raw Request:
+### Sample Raw Request:
 
 GET /api/products/view?page=1&limit=5 HTTP/1.1
 User-Agent: PostmanRuntime/7.28.4
@@ -26,7 +26,7 @@ Host: 127.0.0.1:8000
 Accept-Encoding: gzip, deflate, br
 Connection: keep-alive
  
-Sample Response:
+### Sample Response:
 {"status":"success","message":[{"id":1,"name":"Espresso","price":"100.00","description":"It is a hot Coffee","created_at":"2021-09-05T11:50:01.000000Z","updated_at":"2021-09-05T11:50:01.000000Z"},{"id":2,"name":"Iced Americano","price":"120.50","description":"It is a cold Coffee","created_at":"2021-09-05T11:50:01.000000Z","updated_at":"2021-09-05T11:50:01.000000Z"},{"id":3,"name":"Mocha Milktea","price":"200.25","description":"It is not a Coffee.","created_at":"2021-09-05T11:50:01.000000Z","updated_at":"2021-09-05T11:50:01.000000Z"},{"id":4,"name":"Mango Cheese Cake","price":"120.25","description":"It is not a Coffee.","created_at":"2021-09-05T11:50:01.000000Z","updated_at":"2021-09-05T11:50:01.000000Z"},{"id":5,"name":"Americano","price":"300.25","description":"It is a Coffee.","created_at":"2021-09-05T11:50:01.000000Z","updated_at":"2021-09-05T11:50:01.000000Z"}]}
 
 ==============================================================================
@@ -35,7 +35,7 @@ Sample Response:
 Method : GET
 http://127.0.0.1:8000/api/products/view?id=<product_id>
 
-Sample Raw Request:
+### Sample Raw Request:
 
 GET /api/products/view?id=5 HTTP/1.1
 User-Agent: PostmanRuntime/7.28.4
@@ -45,7 +45,7 @@ Host: 127.0.0.1:8000
 Accept-Encoding: gzip, deflate, br
 Connection: keep-alive
  
-Sample Response:
+### Sample Response:
 {"status":"success","message":{"id":5,"name":"Americano","price":"300.25","description":"It is a Coffee.","created_at":"2021-09-05T11:50:01.000000Z","updated_at":"2021-09-05T11:50:01.000000Z"}}
 
 ==============================================================================
@@ -54,7 +54,11 @@ Sample Response:
 Method : POST
 http://127.0.0.1:8000/api/products/add
 
-Sample Raw Request:
+### Post Request Payload Format:
+Content-Disposition: form-data; name="payload"
+{"name":"<product_name>", "price":"<product_price>", "description":"<product_description>"}
+
+### Sample Raw Request:
 
 POST /api/products/add HTTP/1.1
 User-Agent: PostmanRuntime/7.28.4
@@ -71,7 +75,7 @@ Content-Disposition: form-data; name="payload"
 {"name":"Taro Cheese Cake", "price":"150.50", "description":"Cold Milk Tea Drink"}
 ----------------------------703980861191072939000439--
  
-Sample Response: 
+### Sample Response: 
 {"status":"success","message":34}
 
 
