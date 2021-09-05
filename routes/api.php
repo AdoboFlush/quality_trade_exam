@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/get_products', function(){
-    return ['message' => 'hello-test'];
-});
+Route::get('/products/{keyword}', [ProductController::class, 'index_get']);
+Route::post('/products/{keyword}', [ProductController::class, 'index_post']);
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
