@@ -79,7 +79,7 @@ class ProductController extends Controller
                 $validator = Validator::make($request_data, $rules);
                 if ($validator->passes()) {
                     $validated_data = $validator->validated();
-                    $product->saveProduct($validated_data);
+                    $message = $product->saveProduct($validated_data);
                 } else {
                     $error_arr = [];
                     foreach ($validator->errors()->all() as $message) {
@@ -92,24 +92,34 @@ class ProductController extends Controller
 
             }
             elseif($keyword == 'update'){
-    
-                $id = $request->id;
-                $description =  $request->description;
-                $name =  $request->name;
-                $price =  $request->price;
 
-                if(!empty($id) && is_numeric($id)){
-                    $product = new Product();
-                    $input = $this->validate($request, [
-                                'name'=> 'required|unique:products|max:255',
-                                'price'=>'required|numeric|between:0.00,99999999.99',
-                                'description'=>'required'
-                            ]);
-                    $input['id'] = $id;
-                    $product->updateProduct($input);
+                $request_data = json_decode($request->payload, true);
+                if(empty($request_data)){
+                    throw new CustomApiException('No input json payload received');
                 }
-                
-    
+
+                $product = new Product();
+                $rules = [
+                    'id'=>'required',
+                    'name'=> 'required|unique:products|max:255',
+                    'price'=>'required|numeric|between:0.00,99999999.99',
+                    'description'=>'required'
+                ];
+            
+                $validator = Validator::make($request_data, $rules);
+                if ($validator->passes()) {
+                    $validated_data = $validator->validated();
+                    $message = $product->updateProduct($validated_data);
+                } else {
+                    $error_arr = [];
+                    foreach ($validator->errors()->all() as $message) {
+                        $error_arr[] = $message;
+                    }
+                    $error_msg = json_encode($error_arr);
+                    throw new CustomApiException($error_msg);
+                    $status= 'error';
+                }
+
             }
             elseif($keyword == 'delete'){
 
