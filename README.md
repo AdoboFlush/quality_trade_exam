@@ -77,3 +77,7 @@ Content-Disposition: form-data; name="payload"
  
 ### Sample Response: 
 {"status":"success","message":34}
+
+## How would I implement the featured products
+
+If I'm going to use this product table, I will create a new table named "featured" with fields like id, product_id, created_at, updated_at. From that table, I can add the featured products by creating a new record to it with the foreign key of product_id. The product_id will be the id field of the product which I can use to link what product from the products table will be displayed as featured. For the sql query, we can join the tables so that we can only display the products that is also on the featured table.
